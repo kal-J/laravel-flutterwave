@@ -163,7 +163,8 @@ final class Modal
         $data = $response->json()['data'] ?? null;
 
         if ($status !== 'success') {
-            throw new Exception($message || "{$data || ''}");
+            $jsonData = $data != null ? json_encode($data) : 'Failed to generate payment link';
+            throw new Exception($message ?? "{$jsonData}");
         }
 
         if (empty($data['link'])) {
