@@ -163,7 +163,7 @@ final class Modal
         $data = $response->json()['data'] ?? null;
 
         if ($status !== 'success') {
-            throw new Exception($message);
+            throw new Exception($message || "{$data || ''}");
         }
 
         if (empty($data['link'])) {
